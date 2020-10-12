@@ -24,7 +24,7 @@ int main()
 	    k=0;
 	    c='1';
 	    if(gameGuide()) break;
-	    for(int i{0};i<n;i++)
+	    for(int i{0};i<n;i++)	//Loops makes the board
 	    {
 		    b[i]=vector<char>(n);
 		    for(int j{0};j<n;j++)
@@ -37,7 +37,7 @@ int main()
    
         printBoard(b);
         k++;
-	    while(winCheck(b))
+	    while(winCheck(b))		//if none have won yet then winCheck() returns 1 else returns 0
 	    {
 	    	t=askForInput(b,k);	//t will have value 1 when the game is draw
 	        if(t) break; 
