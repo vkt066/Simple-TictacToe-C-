@@ -3,16 +3,16 @@
 #include<vector>
 #include<iomanip>
 using namespace std;
-int gameGuide();
-void printBoard(const vector<vector<char>>& a);
-void updateBoard(vector<vector<char>>& a,const char c,const char q);
-int askForInput(vector<vector<char>>& a,int& k);
-int winCheck(const vector<vector<char>>& a,const int draw=0);
-int horizontalCheck(const vector<vector<char>>& a);
-int verticalCheck(const vector<vector<char>>& a);
-int diagonalCheck(const vector<vector<char>>& a);
-int finalCheck(const vector<vector<char>>& a);
-int reEnterCheck(const vector<vector<char>>& a,const char& k);
+int gameGuide();	//This prints the guide to the game/ return 1 if player wishes to play else returns 0
+void printBoard(const vector<vector<char>>& a); //prints the board
+void updateBoard(vector<vector<char>>& a,const char c,const char q); //Updates the TicTacToe Board
+int askForInput(vector<vector<char>>& a,int& k);	//Asks for Input
+int winCheck(const vector<vector<char>>& a,const int draw=0);	//Checks the winner
+int horizontalCheck(const vector<vector<char>>& a);	//Will be called in winCheck
+int verticalCheck(const vector<vector<char>>& a);	//Will be called in winCheck
+int diagonalCheck(const vector<vector<char>>& a);	//Will be called in winCheck
+int finalCheck(const vector<vector<char>>& a);		//Will be called in winCheck
+int reEnterCheck(const vector<vector<char>>& a,const char& k);	//Checks if the user enter the place which was entered before
 
 int main()
 {
@@ -39,13 +39,13 @@ int main()
         k++;
 	    while(winCheck(b))
 	    {
-	    	t=askForInput(b,k);
+	    	t=askForInput(b,k);	//t will have value 1 when the game is draw
 	        if(t) break; 
 	        k++;
 	        
 	    
 	    }
-	    if(t){
+	    if(t){	//This restrats the game
 	    	printf("STARTING NEW GAME:::.........\n\n\n\n\n");
 	    	continue;
 		} 
@@ -117,7 +117,7 @@ int  askForInput(vector<vector<char>>& a,int& k)
 		} 
         else{
         	printf("Might have Enter the same place which was enter before\nRENTER THE PLACE\n\n");
-        	askForInput(a,k);
+        	askForInput(a,k);	//Recursive call if the user Enters wrong input which was already there
 		} 
         
     }
@@ -132,7 +132,7 @@ int  askForInput(vector<vector<char>>& a,int& k)
 		} 
         else{
         	printf("Might have Enter the same place which was enter before\nRENTER THE PLACE\n\n");
-        	askForInput(a,k);
+        	askForInput(a,k);	//Recursive call if the user Enters wrong input which was already there
 		} 
         
     }
@@ -140,7 +140,7 @@ int  askForInput(vector<vector<char>>& a,int& k)
 }   
 
     
-int winCheck(const vector<vector<char>>& a,const int d)
+int winCheck(const vector<vector<char>>& a,const int d)		//Check if any of members have if won returns 0 else returns 1
 {
     if(horizontalCheck(a)) return 0;
     if(verticalCheck(a)) return 0;
@@ -152,7 +152,7 @@ int winCheck(const vector<vector<char>>& a,const int d)
     }
     return 1;
 }
-int horizontalCheck(const vector<vector<char>>& a)
+int horizontalCheck(const vector<vector<char>>& a)	//checks if the column contains same elements and returns 1 else returns 0;
 {
     for(int i{0};i<a.size();i++)
 	{
@@ -160,7 +160,7 @@ int horizontalCheck(const vector<vector<char>>& a)
 	}
 	return 0;
 }
-int verticalCheck(const vector<vector<char>>& a)
+int verticalCheck(const vector<vector<char>>& a)	//checks if the row contains same elements and returns 1 else returns 0;
 {
      for(int i{0};i<a.size();i++)
 	{
@@ -168,7 +168,7 @@ int verticalCheck(const vector<vector<char>>& a)
 	}
 	return 0;
 }
-int diagonalCheck(const vector<vector<char>>& a)
+int diagonalCheck(const vector<vector<char>>& a)	//checks if the any of the diagonal contains same elements and returns 1 else returns 0;
 {
     
     
@@ -185,7 +185,7 @@ int diagonalCheck(const vector<vector<char>>& a)
     return 0;
    
 }
-int reEnterCheck(const vector<vector<char>>& a,const char& k)
+int reEnterCheck(const vector<vector<char>>& a,const char& k)		//This checks whether User Enter correct input
 {
     int i,j;
     for(i=0;i<a.size();i++)
@@ -200,7 +200,7 @@ int reEnterCheck(const vector<vector<char>>& a,const char& k)
 	} 
 	return 0;
 }
-int finalCheck(const vector<vector<char>>& a)
+int finalCheck(const vector<vector<char>>& a)		//Checks if the game is draw will be called in winChaeck() function
 {
     int i,j,k=0;
     for(i=0;i<a.size();i++)
